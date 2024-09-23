@@ -24,8 +24,9 @@ class ProductsFactory extends Factory
             //
             'nome' => $nome,
             'descricao' => $this->faker->paragraph(),
+            'preco' => $this->faker->randomNumber(2),
             'slug' => Str::slug($nome),
-            'image' => $this->faker->imageUrl(400, 400),
+            'imagem' => $this->faker->imageUrl(400, 400),
             'id_user' => User::pluck('id')->random(),
             'id_category' => Category::pluck('id')->random()
         ];
