@@ -5,8 +5,8 @@
 <!--inserir no yield do app sheet este fragmento-->
 @section('content')
 <style>
-    .home-margin{
-        margin-top:10px;
+    .home-margin {
+        margin-top: 10px;
     }
 </style>
 <div class="row">
@@ -30,5 +30,11 @@
     </div>
     @endforeach
 </div>
-
+<!--pagination-->
+<!--{{$produtos->links('pagination::bootstrap-5')}}-->
+<!--componente de paginacao-->
+@include('partials.pagination',[
+'items' => $produtos,
+'route' => '/'
+])
 @endsection
