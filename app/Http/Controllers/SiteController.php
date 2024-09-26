@@ -13,10 +13,7 @@ class SiteController extends Controller
     {
         //estou pedindo os produtos paginados
         $produtos = Products::paginate(20);
-        //estou pedindo todas as categorias
-        $categorias = Category::all();
-
-        return view('site.home', compact(['produtos', 'categorias']));
+        return view('site.home', compact(['produtos',]));
     }
 
     public function detalhes($slug){
@@ -24,5 +21,14 @@ class SiteController extends Controller
     $produto = Products::where('slug',$slug)->first();
     //passar o produto para a pagina de detalhes
     return view('site.detalhes',compact('produto'));
+    }
+
+    public function categoria($categoria){
+        //pesquisa por nome
+        //$categoria = Category::where('nome',$categoria)->first();
+        $categoria = Category::find($categoria);
+        //pesquisaros produtos
+        $produtos = Products::where('id_category',$categoria->id)->paginate(8);
+        return view('site.categoria',compact(['produtos','categoria']));
     }
 }

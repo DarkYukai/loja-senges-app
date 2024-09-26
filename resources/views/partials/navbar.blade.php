@@ -12,6 +12,17 @@
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="#">Home</a>
                 </li>
+                <!--colocar o dropdown-->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Categorias
+                    </a>
+                    <ul class="dropdown-menu">
+                        @foreach($categoriasMenu as $categoria)
+                        <li><a class="dropdown-item" href="/site/categoria/{{$categoria->id}}">{{$categoria->nome}}</a></li>
+                        @endforeach
+                    </ul>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="#">Contato</a>
                 </li>
