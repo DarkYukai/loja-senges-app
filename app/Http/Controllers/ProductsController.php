@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProductsRequest;
 use App\Http\Requests\UpdateProductsRequest;
+use App\Models\Category;
 use App\Models\Products;
 
 class ProductsController extends Controller
@@ -13,7 +14,9 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        //
+        //eu vou buscar informaçoes do banco
+        $produtos = Products::paginate(25);
+        return view('admin.produtos.index', compact('produtos'));
     }
 
     /**
@@ -21,7 +24,10 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        //
+        //aqui eu carrego a informação necessaria para criar um novo registro
+        //carregar as categorias
+        $categorias = Category::all();
+        return view('admin.produtos.create', compact('categorias'));
     }
 
     /**
@@ -29,7 +35,10 @@ class ProductsController extends Controller
      */
     public function store(StoreProductsRequest $request)
     {
-        //
+        //salva o registro atraves do modelo
+        Products::create($request->all());
+        //redireciona ou gera um response
+        return redirect()->away('/produtos')->with('success', 'Produto criado com sucesso');
     }
 
     /**
