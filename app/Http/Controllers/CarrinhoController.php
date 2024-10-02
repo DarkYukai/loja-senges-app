@@ -50,7 +50,7 @@ class CarrinhoController extends Controller
 
     public function limparCarrinho()
     {
-        \Cart::clean();
+        \Cart::clear();
         //return redirect()->route('site.carrinho');
         return redirect()->away('/carrinho')->with('success', 'Carrinho limpo com sucesso!');
     }
