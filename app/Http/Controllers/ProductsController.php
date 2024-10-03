@@ -46,7 +46,8 @@ class ProductsController extends Controller
      */
     public function show(Products $products)
     {
-        //
+        //        
+        return view('admin.produtos.show', compact('products'));
     }
 
     /**
@@ -55,6 +56,8 @@ class ProductsController extends Controller
     public function edit(Products $products)
     {
         //
+        $categorias = Category::all();
+        return view('admin.produtos.edit', compact('products', 'categorias'));
     }
 
     /**
@@ -63,6 +66,8 @@ class ProductsController extends Controller
     public function update(UpdateProductsRequest $request, Products $products)
     {
         //
+        $products->update($request->all());
+        return redirect()->away('/produtos')->with('success', 'Produto atualizado com sucesso!');
     }
 
     /**
@@ -71,5 +76,7 @@ class ProductsController extends Controller
     public function destroy(Products $products)
     {
         //
+        $products->delete();
+        return redirect()->away('/produtos')->with('success', 'Produto removido com sucesso!');
     }
 }
