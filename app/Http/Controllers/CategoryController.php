@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
+use App\Models\Products;
 
 class CategoryController extends Controller
 {
@@ -14,7 +15,7 @@ class CategoryController extends Controller
     public function index()
     {
         //
-        $Categorias = Category::paginate(25);
+        $categorias = Category::paginate(25);
         return view('admin.categorias.index', compact('categorias'));
     }
 
@@ -34,7 +35,7 @@ class CategoryController extends Controller
     {
         //
         Category::create($request->all());
-        return redirect()->away('/categorias')->with('success', 'Categoria criado com sucesso');
+        return redirect()->away('/admin/categorias')->with('success', 'Categoria criado com sucesso');
     }
 
     /**
@@ -62,7 +63,7 @@ class CategoryController extends Controller
     {
         //
         $category->update($request->all());
-        return redirect()->away('/categorias')->with('success', 'Categoria atualizado com sucesso!');
+        return redirect()->away('/admin/categorias')->with('success', 'Categoria atualizado com sucesso!');
     }
 
     /**
@@ -70,11 +71,12 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        //    
+        
         if ($category->produtos()->count() > 0) {
-            return redirect()->away('/categorias')->with('error', 'Categoria possui dependentes!');
+            return redirect()->away('/admin/categorias')->with('error', 'Categoria possui dependentes!');
         }
         $category->delete();
-        return redirect()->away('/categorias')->with('success', 'Categoria removida com suceso');
+        return redirect()->away('/admin/categorias')->with('success', 'Categoria removida com suceso');
     }
 }
