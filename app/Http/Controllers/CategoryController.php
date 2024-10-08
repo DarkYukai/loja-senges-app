@@ -41,27 +41,30 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Category $category)
+    public function show($id)
     {
         //
+        $category = Category::find($id);
         return view('admin.categorias.show', compact('category'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Category $category)
+    public function edit($id)
     {
         //
+        $category = Category::find($id);
         return view('admin.categorias.edit', compact('category'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCategoryRequest $request, Category $category)
+    public function update(UpdateCategoryRequest $request, $id)
     {
         //
+        $category = Category::find($id);
         $category->update($request->all());
         return redirect()->away('/admin/categorias')->with('success', 'Categoria atualizado com sucesso!');
     }
@@ -69,11 +72,12 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category)
+    public function destroy($id)
     {
         //    
+        $category = Category::find($id);
         
-        if ($category->produtos()->count() > 0) {
+        if (!$category || $category->produtos()->count() > 0) {
             return redirect()->away('/admin/categorias')->with('error', 'Categoria possui dependentes!');
         }
         $category->delete();
