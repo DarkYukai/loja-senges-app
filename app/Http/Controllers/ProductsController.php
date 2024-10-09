@@ -59,7 +59,10 @@ class ProductsController extends Controller
         //
         $categorias = Category::all();
         $product = Products::find($id);
-        return view('admin.produtos.edit', compact('products', 'categorias'));
+        return view(
+            'admin.produtos.edit',
+            compact('product', 'categorias')
+        );
     }
 
     /**

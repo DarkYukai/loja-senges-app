@@ -14,7 +14,7 @@ class Products extends Model
         'descricao',
         'preco',
         'slug',
-        'image',
+        'imagem',
         'id_category',
         'id_user'
     ];
