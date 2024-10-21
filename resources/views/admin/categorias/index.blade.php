@@ -49,4 +49,49 @@
 
 
 
+<!--modal de confirmação-->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!--cabeç<alho-->
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmar Remoção</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal">
+
+                </button>
+            </div>
+            <!--corpo-->
+            <div class="modal-body">
+                Tem certesa que deseja remover este categoria?
+            </div>
+            <!--footer-->
+            <div class="modal-footer">
+                <form id="deleteForm" method="POST" action="/admin/categorias/{{$categoria->id}}">
+                    <!--token-->
+                    @csrf
+                    <!--alterar para metodo dalete-->
+                    @method('DELETE')
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Canselar
+                    </button>
+                    <button type="submit" class="btn btn-danger">
+                        Remover
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+
+@section('scripts')
+<script>
+    var confirmDeleteModal = document.getElementById("confirmDeleteModal");
+    confirmDeleteModal.addEventListener('show.bs.modal', function(event) {
+        var button = event.relatedTarget;
+        var categoryId = button.getAttribute('data-category-id');
+        var form = document.getElementById('deleteForm');
+        form.action = '/admin/categorias/' + categoryId;
+    });
+</script>
 @endsection
