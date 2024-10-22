@@ -86,8 +86,8 @@
 
 @section('scripts')
 <script>
-    var confirmDeleteModal = document.getElementById("confirmDeleteModal");
-    confirmDeleteModal.addEventListener('show.bs.modal', function(event) {
+    var confirmDeleteModal = document.getElementById('confirmDeleteModal');
+    confirmDeleteModal.addEventListener('show.bs.modal', function (event) {
         var button = event.relatedTarget;
         var categoryId = button.getAttribute('data-category-id');
         var form = document.getElementById('deleteForm');
